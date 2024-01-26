@@ -41,11 +41,6 @@ private:
 	ContorollerVector2 inputStick;
 	
 
-
-	
-
-
-
 	void _Update();
 	bool IsPressKey(int DIK);
 	bool IsTriggerKey(int DIK);

@@ -15,7 +15,7 @@ void InputManager::Update()
 
 void InputManager::_Update()
 {
-	memcpy(keys,preKeys,256);
+	memcpy(preKeys,keys,256);
 	Novice::GetHitKeyStateAll(keys);
 	Novice::GetAnalogInputLeft(0, &inputStick.x, &inputStick.y);
 
