@@ -2,6 +2,11 @@
 #include <Novice.h>
 #include "Vec2Op.h"
 #include "InputManager.h"
+
+#include "Bullet.h"
+
+
+const int kMaxBullet = 10;
 struct PlayerStruct
 {
 	Vec2Op pos;
@@ -18,11 +23,16 @@ class Player
 private:
 	PlayerStruct player{};
 
-	Vec2Op input{};
+	Vec2Op inputVel{};
 	ContorollerVector2 inputNum;
 	
 
 public:
+
+
+	Bullet* bullet[kMaxBullet];
+	int shotCT;
+	int cullentShotCT;
 
 	 Player();
 	 ~Player();
@@ -30,6 +40,11 @@ public:
 	 void Init();
 	 void Upadte();
 	 void Draw();
+	 void Debug();
+
+	 void PlayerInputMove(Vec2Op &inputVel);
+
+	 void Shot();
 
 };
 

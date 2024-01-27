@@ -56,3 +56,40 @@ void Vec2Op::operator/=(const Vec2Op& obj)
 	sc.x_ /= obj.x_;
 	sc.y_ /= obj.y_;
 }
+
+Vec2Op Vec2Op::operator*(const Vec2Op& obj)
+{
+	Vec2Op sc;
+	sc.x_ = x_ * obj.x_;
+	sc.y_ = y_ * obj.y_;
+	return sc;
+}
+
+void Vec2Op::operator*=(const Vec2Op& obj)
+{
+	Vec2Op sc;
+	sc.x_ *= obj.x_;
+	sc.y_ *= obj.y_;
+}
+
+//Vec2Op Vec2Op::NormalizeVec2(const Vec2Op& vec2)
+//{
+//	Vec2Op result=vec2;
+//	float length = sqrtf(vec2.x_ * vec2.x_ + vec2.y_ * vec2.y_);
+//	result.x_ /= length;
+//	result.y_ /= length;
+//	return result;
+//}
+
+Vec2Op NormalizeVec2(const Vec2Op& vec2)
+{
+	Vec2Op result = vec2;
+	if (vec2.x_!=0||vec2.y_!=0)
+	{
+		float length = sqrtf(vec2.x_ * vec2.x_ + vec2.y_ * vec2.y_);
+		result.x_ /= length;
+		result.y_ /= length;
+	}
+	
+	return result;
+}

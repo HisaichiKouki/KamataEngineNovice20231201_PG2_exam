@@ -1,5 +1,8 @@
 ﻿#pragma once
 #include <Novice.h>
+#include <corecrt_math.h>
+
+
 class Vec2Op
 {
 public:
@@ -24,7 +27,10 @@ public:
 	Vec2Op operator/(const Vec2Op& obj);
 	void operator/=(const Vec2Op& obj);
 
+	Vec2Op operator*(const Vec2Op& obj);
+	void operator*=(const Vec2Op& obj);
 
 		;
 };
 
+Vec2Op NormalizeVec2(const Vec2Op& vec2);

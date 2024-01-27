@@ -16,34 +16,97 @@ void Player::Init()
 
 	player.color = WHITE;
 
+	player.velocity = { 8,8 };
+
+	for (int i = 0; i < kMaxBullet; i++)
+	{
+		bullet[i] = new Bullet;
+	}
+
+	shotCT = 5;
+	cullentShotCT = 0;
 }
 
 void Player::Upadte()
 {
-	if (InputManager::GetIsTriggerKey(DIK_W))
-	{
-		player.pos.y_ -= 10;
-		Novice::DrawBox(0, 100, 50, 50, 0, BLUE, kFillModeSolid);
+	PlayerInputMove(inputVel);
 
-	}
-	if (InputManager::GetIsPressKey(DIK_D))
-	{
-		player.pos.y_ -= 10;
-		Novice::DrawBox(0, 150, 50, 50, 0, GREEN, kFillModeSolid);
+	player.pos += inputVel * player.velocity;
 
-	}
-	if (InputManager::GetIsReleaseKey(DIK_S))
+	Shot();
+	for (int i = 0; i < kMaxBullet; i++)
 	{
-		player.pos.y_ -= 10;
-		Novice::DrawBox(0, 200, 50, 50, 0, RED, kFillModeSolid);
+		bullet[i]->Update();
 	}
 	InputManager::GetLeftStick(inputNum);
 
-	Novice::ScreenPrintf(0, 0, "%d %d", inputNum.x, inputNum.y);
 
 }
 
 void Player::Draw()
 {
+	
 	Novice::DrawEllipse(int(player.pos.x_), int(player.pos.y_), int(player.size.x_ / 2), int(player.size.y_ / 2), 0, player.color,kFillModeSolid);
+	
+
+}
+
+void Player::Debug()
+{
+#ifdef DEBUG
+
+	
+#endif // DEBUG
+	Novice::ScreenPrintf(0, 0, "%d %d", inputNum.x, inputNum.y);
+
+	Novice::ScreenPrintf(0, 20, "pos");
+	player.pos.Vec2Op::Vec2OpScreenPrintf(60, 20,1);
+	
+}
+
+void Player::PlayerInputMove(Vec2Op &inputVel_)
+{
+	inputVel_ = { 0,0 };
+	if (InputManager::GetIsPressKey(DIK_W))
+	{
+		inputVel_.y_--;
+	}
+	if (InputManager::GetIsPressKey(DIK_S))
+	{
+		inputVel_.y_++;
+	}
+	if (InputManager::GetIsPressKey(DIK_A))
+	{
+		inputVel_.x_--;
+	}
+	if (InputManager::GetIsPressKey(DIK_D))
+	{
+		inputVel_.x_++;
+	}
+
+	inputVel_=NormalizeVec2(inputVel_);
+}
+
+void Player::Shot()
+{
+	if (cullentShotCT>0)
+	{
+		cullentShotCT--;
+	}
+	if (cullentShotCT<=0&&InputManager::GetIsPressKey(DIK_SPACE))
+	{
+		for (int i = 0; i < kMaxBullet; i++)
+		{
+			if (!bullet[i]->isAlive)
+			{
+				bullet[i]->isAlive = true;
+
+				bullet[i]->pos = player.pos;
+
+				cullentShotCT = shotCT;
+				break;
+			}
+		}
+	}
+	
 }

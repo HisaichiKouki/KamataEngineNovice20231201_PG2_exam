@@ -50,6 +50,9 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Adapter</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Adapter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.h" />
     <ClInclude Include="InputManager.h">
+      <Filter>Adapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
       <Filter>Adapter</Filter>
     </ClInclude>
   </ItemGroup>

@@ -46,6 +46,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		player->Draw();
 
+		for (int i = 0; i < kMaxBullet; i++)
+		{
+			player->bullet[i]->Draw();
+		}
+
+		player->Debug();
 
 		///------------------///
 		/// ↑描画処理ここまで
