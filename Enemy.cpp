@@ -3,7 +3,7 @@
 Enemy::Enemy()
 {
 	
-	deadCountNum=4;
+	deadCountNum=0;
 	direction = 1;
 
 	Init();
@@ -13,7 +13,8 @@ void Enemy::Init()
 {
 	pos = { 640,100 };
 	//size = { 40,40 };
-	radius = 40 - 5 * deadCountNum;
+	radius = 40 - 13 * deadCountNum;
+
 	color = 0xaa00aaff;
 
 	velocity = { 4* direction,7 };
@@ -37,6 +38,7 @@ void Enemy::Init()
 
 void Enemy::Update()
 {
+
 	if (isAlive)
 	{
 		pos += velocity;
@@ -95,7 +97,10 @@ void Enemy::Update()
 		{
 			direction *= -1;
 			deadCountNum++;
-			Init();
+			if (deadCountNum < 3)
+			{
+				Init();
+			}
 		}
 	}
 	
@@ -111,7 +116,7 @@ void Enemy::Draw()
 		currentRandSize-=1;
 
 	}
-	if (deadCountNum<6)
+	if (deadCountNum<3)
 	{
 		if (isAlive)
 		{
