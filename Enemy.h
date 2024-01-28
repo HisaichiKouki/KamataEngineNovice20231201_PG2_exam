@@ -3,7 +3,7 @@
 #include "Vec2Op.h"
 #include "randPlus.h"
 #include "Easing.h"
-
+#include "InputManager.h"
 
 
 class Enemy

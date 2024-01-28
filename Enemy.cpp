@@ -2,8 +2,8 @@
 
 Enemy::Enemy()
 {
-	
-	deadCountNum=0;
+
+	deadCountNum = 2;
 	direction = 1;
 
 	Init();
@@ -17,7 +17,7 @@ void Enemy::Init()
 
 	color = 0xaa00aaff;
 
-	velocity = { 4* direction,7 };
+	velocity = { 4 * direction,7 };
 	isAlive = true;
 	respawnTime = 60;
 	currentTime = 0;
@@ -29,8 +29,8 @@ void Enemy::Init()
 	hitPoint = 30;
 
 	randPos = {};
-	initRandSize= (int)radius/4;
-	currentRandSize=0;
+	initRandSize = (int)radius / 4;
+	currentRandSize = 0;
 	easeSize = 0;
 	easeSizeT = 0;
 	setEaseTime = 30;
@@ -74,20 +74,20 @@ void Enemy::Update()
 			isHit = false;
 		}
 
-		if (hitPoint<=0)
+		if (hitPoint <= 0)
 		{
-			
+
 			isAlive = false;
 			isDead = true;
-			
+
 		}
 	}
 	else
 	{
-		if (currentTime<respawnTime)
+		if (currentTime < respawnTime)
 		{
 			currentTime++;
-			if (currentTime>deadTime)
+			if (currentTime > deadTime)
 			{
 				isDead = false;
 			}
@@ -101,22 +101,33 @@ void Enemy::Update()
 			{
 				Init();
 			}
+			else
+			{
+				if (InputManager::GetIsTriggerKey(DIK_R))
+				{
+					direction = 1;
+					deadCountNum = 0;
+					Init();
+				}
+			}
+
+
 		}
 	}
-	
+
 }
 
 void Enemy::Draw()
 {
 	MoveSizeShake();
-	if (currentRandSize>=0)
+	if (currentRandSize >= 0)
 	{
 		randPos.x_ = (float)GetRandMinMax(-currentRandSize, currentRandSize);
 		randPos.y_ = (float)GetRandMinMax(-currentRandSize, currentRandSize);
-		currentRandSize-=1;
+		currentRandSize -= 1;
 
 	}
-	if (deadCountNum<3)
+	if (deadCountNum < 3)
 	{
 		if (isAlive)
 		{
@@ -136,11 +147,14 @@ void Enemy::Draw()
 	}
 	else
 	{
-		Novice::ScreenPrintf(590, 360, "gameClear");
-	}
-	
+		Novice::ScreenPrintf(590, 360, "Game Clear");
+		Novice::ScreenPrintf(590, 380, "Restart > R <");
 
-	
+
+	}
+
+
+
 }
 
 void Enemy::MoveSizeShake()
