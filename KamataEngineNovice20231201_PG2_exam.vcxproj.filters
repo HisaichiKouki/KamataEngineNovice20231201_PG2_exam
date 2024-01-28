@@ -68,6 +68,9 @@
     <ClCompile Include="randPlus.cpp">
       <Filter>Function</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -165,5 +168,6 @@
     <ClInclude Include="randPlus.h">
       <Filter>Function</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h" />
   </ItemGroup>
 </Project>

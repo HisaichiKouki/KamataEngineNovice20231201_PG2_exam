@@ -1,7 +1,5 @@
 #include <Novice.h>
-#include "Player.h"
-#include "Enemy.h"
-#include "Collision.h"
+#include "Game.h"
 const char kWindowTitle[] = "LC1A_20_ヒサイチ_コウキ";
 
 // Windowsアプリでのエントリーポイント(main関数)
@@ -12,9 +10,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int windowY = 720;
 	Novice::Initialize(kWindowTitle, windowX, windowY);
 
-	Player *player=new Player;
-
-	Enemy* enemy = new Enemy;
+	Game* game = new Game;
 
 	//bool True = true;
 	//bool False = false;
@@ -36,47 +32,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///------------------///
 
+		game->Update();
+
 		
-
-		player->Upadte();
-		enemy->Update();
-
-		if (enemy->GetIsAlive())
-		{
-			for (int i = 0; i < kMaxBullet; i++)
-			{
-				if (player->bullet[i]->isAlive)
-				{
-					if (EllipseCollision(enemy->GetPos(), enemy->GetRadius()
-						, player->bullet[i]->pos, player->bullet[i]->radius))
-					{
-						//enemy->setIsAlive(false);
-						enemy->setIsHit(true);
-
-						player->bullet[i]->isAlive = false;
-					}
-				}
-				
-			}
-		}
-		
-		if (EllipseCollision(enemy->GetPos(), enemy->GetRadius()
-			, player->GetPos(), player->GetRadius()))
-		{
-			player->isAlive = false;
-
-
-		}
-
-		if (player->isAlive==false)
-		{
-			if (InputManager::GetIsTriggerKey(DIK_R))
-			{
-				player->Init();
-				enemy->Init();
-
-			}
-		}
 		///------------------///
 		/// ↑更新処理ここまで
 		///------------------///
@@ -85,21 +43,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///------------------///
 
-		enemy->Draw();
-		player->Draw();
-
-
-		for (int i = 0; i < kMaxBullet; i++)
-		{
-			player->bullet[i]->Draw();
-		}
-
-		player->Debug();
-		if (!player->isAlive)
-		{
-			Novice::ScreenPrintf(590, 360, "GameOver");
-			Novice::ScreenPrintf(600, 380, "> R <");
-		}
+		
 		///------------------///
 		/// ↑描画処理ここまで
 		///------------------///
