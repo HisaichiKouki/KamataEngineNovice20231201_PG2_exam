@@ -2,7 +2,7 @@
 #include <Novice.h>
 #include "Vec2Op.h"
 #include "randPlus.h"
-
+#include "Easing.h"
 
 
 
@@ -30,7 +30,14 @@ private:
 	int initRandSize;
 	int currentRandSize;
 
-	float deadCountNum = 0;
+	float deadCountNum;
+	float direction;
+
+
+	float easeSize;
+	float easeSizeT;
+	float setEaseTime;
+	bool resetEaseT;
 
 public:
 
@@ -49,7 +56,7 @@ public:
 	void setIsDead(bool setIsDead_) { this->isDead = setIsDead_; }
 	void setIsHit(bool setIsHit) { this->isHit = setIsHit; }
 
-
+	void MoveSizeShake();
 
 };
 

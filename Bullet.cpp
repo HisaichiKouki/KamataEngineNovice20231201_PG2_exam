@@ -38,6 +38,6 @@ void Bullet::Draw()
 {
 	if (isAlive)
 	{
-		Novice::DrawEllipse(int(pos.x_), int(pos.y_), int(radius), int(radius), 0, color, kFillModeSolid);
+		Novice::DrawEllipse(int(pos.x_), int(pos.y_), int(radius/2), int(radius), 0, color, kFillModeSolid);
 	}
 }
