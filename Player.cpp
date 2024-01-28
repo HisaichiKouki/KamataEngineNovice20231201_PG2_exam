@@ -26,6 +26,10 @@ void Player::Init()
 
 	shotCT = 20;
 	cullentShotCT = 0;
+
+	easeSize=0;
+	easeSizeT=0;
+	setEaseTime = 30;
 }
 
 void Player::Upadte()
@@ -48,8 +52,8 @@ void Player::Upadte()
 
 void Player::Draw()
 {
-
-	Novice::DrawEllipse(int(player.pos.x_), int(player.pos.y_), int(player.size.x_ / 2), int(player.size.y_ / 2), 0, player.color, kFillModeSolid);
+	MoveSizeShake();
+	Novice::DrawEllipse(int(player.pos.x_), int(player.pos.y_), int(player.size.x_ / 2+easeSize), int(player.size.y_ / 2- easeSize), 0, player.color, kFillModeSolid);
 
 
 }
@@ -111,6 +115,9 @@ void Player::Shot()
 				bullet[i]->pos = player.pos;
 
 				cullentShotCT = (int)currentShotCT;
+
+				easeSizeT = 0;
+
 				break;
 			}
 		}
@@ -121,9 +128,9 @@ void Player::Shot()
 		holdSpaceTime++;
 		currentShotCT = (shotCT * (1.0f - holdSpaceTime / 150));
 		moveRaito = (1.0f - holdSpaceTime / 300);
-		if (currentShotCT <= 0)
+		if (currentShotCT <= 2)
 		{
-			currentShotCT = 1;
+			currentShotCT = 2;
 		}
 		if (moveRaito<=0.2f)
 		{
@@ -135,4 +142,21 @@ void Player::Shot()
 		holdSpaceTime = 0;
 		moveRaito = 1;
 	}
+}
+
+void Player::MoveSizeShake()
+{
+	if (InputManager::GetIsReleaseKey(DIK_W)||
+		InputManager::GetIsReleaseKey(DIK_A) ||
+		InputManager::GetIsReleaseKey(DIK_S) ||
+		InputManager::GetIsReleaseKey(DIK_D) )
+	{
+		easeSizeT = 0;
+		
+	}
+	if (easeSizeT < setEaseTime)
+	{
+		easeSizeT++;
+	}
+	easeSize = Easing::OutElasticAmplitude(easeSizeT, setEaseTime, 15.0f, 0.3f);
 }

@@ -4,7 +4,7 @@
 #include "InputManager.h"
 
 #include "Bullet.h"
-
+#include "Easing.h"
 
 const int kMaxBullet = 100;
 struct PlayerStruct
@@ -29,6 +29,9 @@ private:
 	Vec2Op currentVel;
 	float moveRaito;
 	
+	float easeSize;
+	float easeSizeT;
+	float setEaseTime;
 
 public:
 
@@ -51,6 +54,8 @@ public:
 	 void PlayerInputMove(Vec2Op &inputVel);
 
 	 void Shot();
+
+	 void MoveSizeShake();
 
 };
 

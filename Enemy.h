@@ -1,6 +1,10 @@
 #pragma once
 #include <Novice.h>
 #include "Vec2Op.h"
+#include "randPlus.h"
+
+
+
 
 class Enemy
 {
@@ -18,8 +22,15 @@ private:
 	int deadTime;
 
 	bool isDead;
+	bool isHit;
 
-	
+	int hitPoint;
+
+	Vec2Op randPos;
+	int initRandSize;
+	int currentRandSize;
+
+	float deadCountNum = 0;
 
 public:
 
@@ -36,6 +47,7 @@ public:
 
 	void setIsAlive(bool setisAlive_) { this->isAlive = setisAlive_; }
 	void setIsDead(bool setIsDead_) { this->isDead = setIsDead_; }
+	void setIsHit(bool setIsHit) { this->isHit = setIsHit; }
 
 
 

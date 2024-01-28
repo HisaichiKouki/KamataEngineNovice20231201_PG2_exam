@@ -3,13 +3,14 @@
 Enemy::Enemy()
 {
 	Init();
+	deadCountNum=0;
 }
 
 void Enemy::Init()
 {
 	pos = { 640,100 };
 	//size = { 40,40 };
-	radius = 20;
+	radius = 40 - 5 * deadCountNum;
 	color = 0xaa00aaff;
 
 	velocity = { 4,7 };
@@ -19,6 +20,14 @@ void Enemy::Init()
 	deadTime = 30;
 
 	isDead = false;
+	isHit = false;
+
+	hitPoint = 30;
+
+	randPos = {};
+	initRandSize= (int)radius/4;
+	currentRandSize=0;
+
 }
 
 void Enemy::Update()
@@ -46,6 +55,21 @@ void Enemy::Update()
 			velocity.y_ *= -1;
 			pos.y_ = 720 - radius;
 		}
+
+		if (isHit)
+		{
+			hitPoint--;
+			currentRandSize = initRandSize;
+			isHit = false;
+		}
+
+		if (hitPoint<=0)
+		{
+			
+			isAlive = false;
+			isDead = true;
+			
+		}
 	}
 	else
 	{
@@ -60,6 +84,7 @@ void Enemy::Update()
 		}
 		else
 		{
+			deadCountNum++;
 			Init();
 		}
 	}
@@ -68,14 +93,27 @@ void Enemy::Update()
 
 void Enemy::Draw()
 {
+	if (currentRandSize>=0)
+	{
+		randPos.x_ = (float)GetRandMinMax(-currentRandSize, currentRandSize);
+		randPos.y_ = (float)GetRandMinMax(-currentRandSize, currentRandSize);
+		currentRandSize-=1;
+
+	}
+	
 	if (isAlive)
 	{
-		Novice::DrawEllipse(int(pos.x_), int(pos.y_), int(radius), int(radius), 0, color, kFillModeSolid);
+		Novice::DrawEllipse(int(pos.x_+ randPos.x_), int(pos.y_+ randPos.y_), int(radius), int(radius), 0, color, kFillModeSolid);
+
+	}
+	if (isHit)
+	{
+		Novice::DrawEllipse(int(pos.x_ + randPos.x_), int(pos.y_ + randPos.y_), int(radius), int(radius), 0, WHITE, kFillModeSolid);
 
 	}
 	if (isDead)
 	{
-		Novice::DrawEllipse(int(pos.x_), int(pos.y_), int(radius), int(radius), 0, RED, kFillModeSolid);
+		Novice::DrawEllipse(int(pos.x_ + randPos.x_), int(pos.y_+ randPos.y_), int(radius), int(radius), 0, RED, kFillModeSolid);
 
 	}
 }

@@ -17,6 +17,9 @@
     <Filter Include="Adapter">
       <UniqueIdentifier>{596b02d2-e437-4cc7-9051-9d66fffbc58a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Function">
+      <UniqueIdentifier>{bde70497-a09c-45d9-92a4-6ee99b6c6af0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -58,6 +61,12 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Adapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>Function</Filter>
+    </ClCompile>
+    <ClCompile Include="randPlus.cpp">
+      <Filter>Function</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +158,12 @@
     </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Adapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>Function</Filter>
+    </ClInclude>
+    <ClInclude Include="randPlus.h">
+      <Filter>Function</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -50,8 +50,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					if (EllipseCollision(enemy->GetPos(), enemy->GetRadius()
 						, player->bullet[i]->pos, player->bullet[i]->radius))
 					{
-						enemy->setIsAlive(false);
-						enemy->setIsDead(true);
+						//enemy->setIsAlive(false);
+						enemy->setIsHit(true);
 
 						player->bullet[i]->isAlive = false;
 					}
