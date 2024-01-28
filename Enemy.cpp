@@ -3,7 +3,7 @@
 Enemy::Enemy()
 {
 
-	deadCountNum = 2;
+	deadCountNum = 0;
 	direction = 1;
 
 	Init();
@@ -33,7 +33,7 @@ void Enemy::Init()
 	currentRandSize = 0;
 	easeSize = 0;
 	easeSizeT = 0;
-	setEaseTime = 30;
+	setEaseTime = 60;
 }
 
 void Enemy::Update()
