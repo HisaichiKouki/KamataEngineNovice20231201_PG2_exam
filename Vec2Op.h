@@ -33,4 +33,4 @@ public:
 		;
 };
 
-Vec2Op NormalizeVec2(const Vec2Op& vec2);
+Vec2Op Vec2Normalize(const Vec2Op& vec2);

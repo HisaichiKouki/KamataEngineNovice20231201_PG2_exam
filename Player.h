@@ -6,7 +6,7 @@
 #include "Bullet.h"
 
 
-const int kMaxBullet = 10;
+const int kMaxBullet = 100;
 struct PlayerStruct
 {
 	Vec2Op pos;
@@ -15,6 +15,7 @@ struct PlayerStruct
 	Vec2Op accleration;
 
 	unsigned int color;
+	
 };
 
 class Player
@@ -25,13 +26,18 @@ private:
 
 	Vec2Op inputVel{};
 	ContorollerVector2 inputNum;
+	Vec2Op currentVel;
+	float moveRaito;
 	
 
 public:
 
 
 	Bullet* bullet[kMaxBullet];
-	int shotCT;
+	float holdSpaceTime;
+
+	float shotCT;
+	float currentShotCT;
 	int cullentShotCT;
 
 	 Player();

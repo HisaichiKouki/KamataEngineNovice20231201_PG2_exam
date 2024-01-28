@@ -1,5 +1,7 @@
 #include <Novice.h>
 #include "Player.h"
+#include "Enemy.h"
+#include "Collision.h"
 const char kWindowTitle[] = "LC1A_20_ヒサイチ_コウキ";
 
 // Windowsアプリでのエントリーポイント(main関数)
@@ -12,7 +14,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	Player *player=new Player;
 
+	Enemy* enemy = new Enemy;
 
+	//bool True = true;
+	//bool False = false;
 
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
@@ -34,7 +39,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		
 
 		player->Upadte();
+		enemy->Update();
 
+		if (enemy->GetIsAlive())
+		{
+			for (int i = 0; i < kMaxBullet; i++)
+			{
+				if (player->bullet[i]->isAlive)
+				{
+					if (EllipseCollision(enemy->GetPos(), enemy->GetRadius()
+						, player->bullet[i]->pos, player->bullet[i]->radius))
+					{
+						enemy->setIsAlive(false);
+						enemy->setIsDead(true);
+
+						player->bullet[i]->isAlive = false;
+					}
+				}
+				
+			}
+		}
+		
 
 		///------------------///
 		/// ↑更新処理ここまで
@@ -44,7 +69,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///------------------///
 
+		enemy->Draw();
 		player->Draw();
+
 
 		for (int i = 0; i < kMaxBullet; i++)
 		{

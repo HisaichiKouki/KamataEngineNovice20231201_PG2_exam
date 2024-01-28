@@ -5,8 +5,9 @@ class Bullet
 {
 public:
 	Vec2Op pos;
-	Vec2Op size;
+	//Vec2Op size;
 	Vec2Op velocity;
+	float radius;
 	unsigned int color;
 
 	bool isAlive;

@@ -17,13 +17,14 @@ void Player::Init()
 	player.color = WHITE;
 
 	player.velocity = { 8,8 };
-
+	currentVel = player.velocity;
+	moveRaito = 1;
 	for (int i = 0; i < kMaxBullet; i++)
 	{
 		bullet[i] = new Bullet;
 	}
 
-	shotCT = 5;
+	shotCT = 20;
 	cullentShotCT = 0;
 }
 
@@ -31,7 +32,9 @@ void Player::Upadte()
 {
 	PlayerInputMove(inputVel);
 
-	player.pos += inputVel * player.velocity;
+	currentVel.x_ = player.velocity.x_ * moveRaito;
+	currentVel.y_ = player.velocity.y_ * moveRaito;
+	player.pos += inputVel * currentVel;
 
 	Shot();
 	for (int i = 0; i < kMaxBullet; i++)
@@ -45,9 +48,9 @@ void Player::Upadte()
 
 void Player::Draw()
 {
-	
-	Novice::DrawEllipse(int(player.pos.x_), int(player.pos.y_), int(player.size.x_ / 2), int(player.size.y_ / 2), 0, player.color,kFillModeSolid);
-	
+
+	Novice::DrawEllipse(int(player.pos.x_), int(player.pos.y_), int(player.size.x_ / 2), int(player.size.y_ / 2), 0, player.color, kFillModeSolid);
+
 
 }
 
@@ -55,16 +58,18 @@ void Player::Debug()
 {
 #ifdef DEBUG
 
-	
+
 #endif // DEBUG
 	Novice::ScreenPrintf(0, 0, "%d %d", inputNum.x, inputNum.y);
 
 	Novice::ScreenPrintf(0, 20, "pos");
-	player.pos.Vec2Op::Vec2OpScreenPrintf(60, 20,1);
-	
+	player.pos.Vec2Op::Vec2OpScreenPrintf(60, 20, 1);
+
+	Novice::ScreenPrintf(0, 100, "currentShotCT=%f", currentShotCT);
+
 }
 
-void Player::PlayerInputMove(Vec2Op &inputVel_)
+void Player::PlayerInputMove(Vec2Op& inputVel_)
 {
 	inputVel_ = { 0,0 };
 	if (InputManager::GetIsPressKey(DIK_W))
@@ -84,16 +89,18 @@ void Player::PlayerInputMove(Vec2Op &inputVel_)
 		inputVel_.x_++;
 	}
 
-	inputVel_=NormalizeVec2(inputVel_);
+	inputVel_ = Vec2Normalize(inputVel_);
 }
 
 void Player::Shot()
 {
-	if (cullentShotCT>0)
+
+	//currentShotCT = shotCT;
+	if (cullentShotCT > 0)
 	{
 		cullentShotCT--;
 	}
-	if (cullentShotCT<=0&&InputManager::GetIsPressKey(DIK_SPACE))
+	if (cullentShotCT <= 0 && InputManager::GetIsPressKey(DIK_SPACE))
 	{
 		for (int i = 0; i < kMaxBullet; i++)
 		{
@@ -103,10 +110,29 @@ void Player::Shot()
 
 				bullet[i]->pos = player.pos;
 
-				cullentShotCT = shotCT;
+				cullentShotCT = (int)currentShotCT;
 				break;
 			}
 		}
 	}
-	
+
+	if (InputManager::GetIsPressKey(DIK_SPACE))
+	{
+		holdSpaceTime++;
+		currentShotCT = (shotCT * (1.0f - holdSpaceTime / 150));
+		moveRaito = (1.0f - holdSpaceTime / 300);
+		if (currentShotCT <= 0)
+		{
+			currentShotCT = 1;
+		}
+		if (moveRaito<=0.2f)
+		{
+			moveRaito = 0.2f;
+		}
+	}
+	else
+	{
+		holdSpaceTime = 0;
+		moveRaito = 1;
+	}
 }

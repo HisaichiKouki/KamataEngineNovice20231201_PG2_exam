@@ -53,6 +53,12 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Adapter</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Adapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Adapter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -136,6 +142,12 @@
       <Filter>Adapter</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
+      <Filter>Adapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Adapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
       <Filter>Adapter</Filter>
     </ClInclude>
   </ItemGroup>

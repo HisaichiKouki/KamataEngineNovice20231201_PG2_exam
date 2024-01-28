@@ -81,7 +81,7 @@ void Vec2Op::operator*=(const Vec2Op& obj)
 //	return result;
 //}
 
-Vec2Op NormalizeVec2(const Vec2Op& vec2)
+Vec2Op Vec2Normalize(const Vec2Op& vec2)
 {
 	Vec2Op result = vec2;
 	if (vec2.x_!=0||vec2.y_!=0)
