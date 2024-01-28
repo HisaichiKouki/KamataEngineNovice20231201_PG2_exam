@@ -60,7 +60,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 		}
 		
+		if (EllipseCollision(enemy->GetPos(), enemy->GetRadius()
+			, player->GetPos(), player->GetRadius()))
+		{
+			player->isAlive = false;
 
+
+		}
+
+		if (player->isAlive==false)
+		{
+			if (InputManager::GetIsTriggerKey(DIK_R))
+			{
+				player->Init();
+				enemy->Init();
+
+			}
+		}
 		///------------------///
 		/// ↑更新処理ここまで
 		///------------------///
@@ -79,7 +95,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 		player->Debug();
-
+		if (!player->isAlive)
+		{
+			Novice::ScreenPrintf(590, 360, "GameOver");
+			Novice::ScreenPrintf(600, 380, "> R <");
+		}
 		///------------------///
 		/// ↑描画処理ここまで
 		///------------------///

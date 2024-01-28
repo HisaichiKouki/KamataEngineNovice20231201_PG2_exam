@@ -11,7 +11,7 @@ Player::~Player()
 
 void Player::Init()
 {
-	player.pos = { 640,360 };
+	player.pos = { 640,560 };
 	player.size = { 100,100 };
 
 	player.color = WHITE;
@@ -27,25 +27,32 @@ void Player::Init()
 	shotCT = 20;
 	cullentShotCT = 0;
 
-	easeSize=0;
-	easeSizeT=0;
+	easeSize = 0;
+	easeSizeT = 0;
 	setEaseTime = 30;
+	isAlive = true;
+
+	radius = player.size.x_ / 2;
 }
 
 void Player::Upadte()
 {
-	PlayerInputMove(inputVel);
-
-	currentVel.x_ = player.velocity.x_ * moveRaito;
-	currentVel.y_ = player.velocity.y_ * moveRaito;
-	player.pos += inputVel * currentVel;
-
-	Shot();
-	for (int i = 0; i < kMaxBullet; i++)
+	if (isAlive)
 	{
-		bullet[i]->Update();
+		PlayerInputMove(inputVel);
+
+		currentVel.x_ = player.velocity.x_ * moveRaito;
+		currentVel.y_ = player.velocity.y_ * moveRaito;
+		player.pos += inputVel * currentVel;
+
+		Shot();
+		for (int i = 0; i < kMaxBullet; i++)
+		{
+			bullet[i]->Update();
+		}
+		InputManager::GetLeftStick(inputNum);
 	}
-	InputManager::GetLeftStick(inputNum);
+	
 
 
 }
@@ -53,7 +60,10 @@ void Player::Upadte()
 void Player::Draw()
 {
 	MoveSizeShake();
-	Novice::DrawEllipse(int(player.pos.x_), int(player.pos.y_), int(player.size.x_ / 2+easeSize), int(player.size.y_ / 2- easeSize), 0, player.color, kFillModeSolid);
+	if (isAlive)
+	{
+		Novice::DrawEllipse(int(player.pos.x_), int(player.pos.y_), int(player.size.x_ / 2 + easeSize), int(player.size.y_ / 2 - easeSize), 0, player.color, kFillModeSolid);
+	}
 
 
 }
@@ -132,7 +142,7 @@ void Player::Shot()
 		{
 			currentShotCT = 2;
 		}
-		if (moveRaito<=0.2f)
+		if (moveRaito <= 0.2f)
 		{
 			moveRaito = 0.2f;
 		}
@@ -146,13 +156,13 @@ void Player::Shot()
 
 void Player::MoveSizeShake()
 {
-	if (InputManager::GetIsReleaseKey(DIK_W)||
+	if (InputManager::GetIsReleaseKey(DIK_W) ||
 		InputManager::GetIsReleaseKey(DIK_A) ||
 		InputManager::GetIsReleaseKey(DIK_S) ||
-		InputManager::GetIsReleaseKey(DIK_D) )
+		InputManager::GetIsReleaseKey(DIK_D))
 	{
 		easeSizeT = 0;
-		
+
 	}
 	if (easeSizeT < setEaseTime)
 	{

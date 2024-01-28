@@ -28,6 +28,8 @@ private:
 	ContorollerVector2 inputNum;
 	Vec2Op currentVel;
 	float moveRaito;
+
+	float radius;
 	
 	float easeSize;
 	float easeSizeT;
@@ -43,6 +45,8 @@ public:
 	float currentShotCT;
 	int cullentShotCT;
 
+	bool isAlive;
+
 	 Player();
 	 ~Player();
 
@@ -56,6 +60,9 @@ public:
 	 void Shot();
 
 	 void MoveSizeShake();
+
+	 Vec2Op GetPos() { return player.pos; }
+	 float GetRadius() { return radius; }
 
 };
 
