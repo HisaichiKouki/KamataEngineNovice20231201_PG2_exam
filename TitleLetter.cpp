@@ -12,7 +12,7 @@ TitleLetter::~TitleLetter()
 
 void TitleLetter::Init()
 {
-	pos = { 640,100 };
+	pos = { 640,200 };
 	size = { 545,80 };
 	rect.leftTop = { pos.x_ - size.x_ / 2,pos.y_ - size.y_ / 2 };
 	rect.rightTop = { pos.x_ + size.x_ / 2,pos.y_ - size.y_ / 2 };

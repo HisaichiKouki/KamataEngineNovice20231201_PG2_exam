@@ -32,6 +32,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
 	char preKeys[256] = {0};
+	InputManager::GetInstance()->Init();
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -102,27 +103,32 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		{
 			if (change == false)
 			{
+
 				delete title;
 				title = nullptr;
 
 				game = new Game;
+
 			}
 			else if (change == true)
 			{
+
 				delete game;
 				game = nullptr;
-
 				title = new Title;
+
 
 			}
 
 			change = !change;
 			assignment = false;
+			InputManager::GetInstance()->Init();
+
 		}
-		Novice::ScreenPrintf(0, 220, "easeColorT=%f", easeColorT);
+		/*Novice::ScreenPrintf(0, 220, "easeColorT=%f", easeColorT);
 		Novice::ScreenPrintf(0, 240, "easeColorC=%f", easeColorC);
 		Novice::ScreenPrintf(0, 260, "isStart=%d", isStart);
-		Novice::ScreenPrintf(0, 280, "easeColor=%d", easeColor);
+		Novice::ScreenPrintf(0, 280, "easeColor=%d", easeColor);*/
 		///------------------///
 		/// ↑更新処理ここまで
 		///------------------///

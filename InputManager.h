@@ -31,7 +31,7 @@ public:
 		return value;
 	};
 
-
+	void Init();
 private:
 
 	char keys[256];
@@ -46,6 +46,7 @@ private:
 	bool IsTriggerKey(int DIK);
 	bool IsReleaseKey(int DIK);
 
+	
 
 
 

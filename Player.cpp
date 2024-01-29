@@ -31,7 +31,7 @@ void Player::Init()
 	}
 
 	shotCT = 20;
-	cullentShotCT = 5;
+	cullentShotCT = 0;
 
 	easeSize = 0;
 	easeSizeT = 0;
@@ -39,6 +39,9 @@ void Player::Init()
 	isAlive = true;
 
 	radius = player.size.x_ / 2;
+	inputVel = 0;
+	currentShotCT = 18;
+	holdSpaceTime = 0;
 }
 
 void Player::Upadte()
@@ -53,7 +56,7 @@ void Player::Upadte()
 
 		Shot();
 		
-		InputManager::GetLeftStick(inputNum);
+		
 	}
 	for (int i = 0; i < kMaxBullet; i++)
 	{
@@ -76,16 +79,20 @@ void Player::Draw()
 
 void Player::Debug()
 {
-#ifdef DEBUG
+#ifdef _DEBUG
+
+	//Novice::ScreenPrintf(0, 0, "%d %d", inputNum.x, inputNum.y);
+
+	Novice::ScreenPrintf(0, 20, "pos");
+	player.pos.Vec2Op::Vec2OpScreenPrintf(60, 20, 1,"");
+
+	Novice::ScreenPrintf(0, 100, "currentShotCT=%f", currentShotCT);
+	Novice::ScreenPrintf(0, 300, "currentVel X=%f Y=%f", currentVel.x_, currentVel.y_);
+	inputVel.Vec2OpScreenPrintf(0, 320, 1, "input");
 
 
 #endif // DEBUG
-	Novice::ScreenPrintf(0, 0, "%d %d", inputNum.x, inputNum.y);
-
-	Novice::ScreenPrintf(0, 20, "pos");
-	player.pos.Vec2Op::Vec2OpScreenPrintf(60, 20, 1);
-
-	Novice::ScreenPrintf(0, 100, "currentShotCT=%f", currentShotCT);
+	
 
 }
 

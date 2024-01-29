@@ -33,6 +33,15 @@ bool InputManager::IsReleaseKey(int DIK)
 	return preKeys[DIK]&&!keys[DIK];
 }
 
+void InputManager::Init()
+{
+	for (int i = 0; i < 256; i++)
+	{
+		keys[i] = 0;
+		preKeys[i] = 0;
+	}
+}
+
 
 bool InputManager::IsTriggerKey(int DIK)
 {

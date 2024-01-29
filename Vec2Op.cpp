@@ -1,13 +1,14 @@
 #include "Vec2Op.h"
 
 
-void Vec2Op::Vec2OpScreenPrintf(int posX, int posY, int digit)
+void Vec2Op::Vec2OpScreenPrintf(int posX, int posY, int digit, const char* memo)
 {
 	if (digit>7)
 	{
 		digit = 7;
 	}
-	Novice::ScreenPrintf(posX, posY, "[x=%0.*f y=%0.*f]", digit,x_, digit,y_);
+	Novice::ScreenPrintf(posX, posY , memo);
+	Novice::ScreenPrintf(posX, posY+20, "[x=%0.*f y=%0.*f]", digit, x_, digit, y_);
 }
 
 Vec2Op Vec2Op::operator+(const Vec2Op& obj)

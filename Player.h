@@ -25,7 +25,6 @@ private:
 	PlayerStruct player{};
 
 	Vec2Op inputVel{};
-	ContorollerVector2 inputNum;
 	Vec2Op currentVel;
 	float moveRaito;
 
@@ -34,16 +33,16 @@ private:
 	float easeSize;
 	float easeSizeT;
 	float setEaseTime;
-
-public:
-
-
-	Bullet* bullet[kMaxBullet];
 	float holdSpaceTime;
 
 	float shotCT;
 	float currentShotCT;
 	int cullentShotCT;
+public:
+
+
+	Bullet* bullet[kMaxBullet];
+
 
 	bool isAlive;
 

@@ -7,11 +7,7 @@ Game::Game()
 
 Game::~Game()
 {
-	delete player;
-	delete enemy;
-
-	player = nullptr;
-	enemy = nullptr;
+	Finalize();
 }
 
 void Game::Update()
@@ -23,7 +19,7 @@ void Game::Update()
 
 
 
-	player->Upadte();
+    	player->Upadte();
 	enemy->Update();
 
 	if (enemy->GetIsAlive())
@@ -57,9 +53,8 @@ void Game::Update()
 	{
 		if (InputManager::GetIsTriggerKey(DIK_R))
 		{
-			player->Init();
 			enemy->Init();
-
+			player->Init();
 		}
 	}
 	///------------------///
@@ -73,6 +68,15 @@ void Game::Init()
 {
 	player = new Player;
 	enemy = new Enemy;
+}
+
+void Game::Finalize()
+{
+	delete player;
+	delete enemy;
+
+	player = nullptr;
+	enemy = nullptr;
 }
 
 void Game::Draw()

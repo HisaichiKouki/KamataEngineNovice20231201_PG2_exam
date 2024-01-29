@@ -166,6 +166,7 @@ void Enemy::Draw()
 	{
 		Novice::ScreenPrintf(590, 360, "Game Clear");
 		Novice::ScreenPrintf(590, 380, "Restart > R <");
+		Novice::ScreenPrintf(560, 400, "GoTitle > Enter <");
 
 
 	}

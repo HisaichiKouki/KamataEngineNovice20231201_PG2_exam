@@ -16,7 +16,7 @@ public:
 	/// <param name="posX">描画位置X</param>
 	/// <param name="posY">描画位置Y</param>
 	/// <param name="digit">桁数</param>
-	void Vec2OpScreenPrintf(int posX, int posY,int digit);
+	void Vec2OpScreenPrintf(int posX, int posY,int digit,const char *memo);
 
 	Vec2Op operator+(const Vec2Op& obj);
 	void operator+=(const Vec2Op& obj);

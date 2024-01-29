@@ -57,6 +57,6 @@ void Title::Draw()
 	{
 		player->bullet[i]->Draw();
 	}
-	Novice::ScreenPrintf(600, 360, "title");
+	//Novice::ScreenPrintf(600, 360, "title");
 
 }
