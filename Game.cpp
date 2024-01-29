@@ -80,6 +80,7 @@ void Game::Draw()
 	///------------------///
 	/// ↓描画処理ここから
 	///------------------///
+	Novice::DrawBox(0, 0, 1280, 720, 0, 0x333333ff, kFillModeSolid);
 
 	enemy->Draw();
 	player->Draw();

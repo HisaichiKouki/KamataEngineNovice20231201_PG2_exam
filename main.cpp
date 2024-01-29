@@ -11,10 +11,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int windowY = 720;
 	Novice::Initialize(kWindowTitle, windowX, windowY);
 
-	Game* game = new Game;
-	Title* title = new Title;
+	Game* game=nullptr;
+	Title* title=new Title;
 
 	bool change = false;
+	bool isStart = false;
+
+	float easeColorT = 0;
+	int easeColor = 0;
+	float easeColorC = 1;
+	float easeColorMax = 120;
+
+	bool easeStart = false;
+
+	bool assignment = false;
 
 	//bool True = true;
 	//bool False = false;
@@ -35,37 +45,84 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///------------------///
 		/// ↓更新処理ここから
 		///------------------///
-
 		if (InputManager::GetIsTriggerKey(DIK_RETURN))
 		{
-			if (change==false)
-			{
-				delete title;
-				title = nullptr;
-
-				game = new Game;
-			}
-			else if (change==true)
-			{
-				delete game;
-				game = nullptr;
-
-				title = new Title;
-			}
-
-			change = !change;
+			
+				isStart = true;
+			
 		}
+		
 
 		if (change == false)
 		{
 			title->Update();
+			if (title->titleLetter->GetCurrentHP()<=0)
+			{
+			
+					isStart = true;
+				
+				
+			}
+
+			
 		}
 		else if (change == true)
 		{
 			game->Update();
 		}
 
-		
+		if (isStart)
+		{
+			if (easeColorT == easeColorMax / 2)
+			{
+				easeColorC = -1;
+				assignment = true;
+			}
+			if (easeColorT < easeColorMax&& easeColorT>=0)
+			{
+				easeColorT += easeColorC * 2;
+			}
+			else if(easeColorT<0)
+			{
+				easeColorT = 0;
+				easeColorC = 1;
+				isStart = false;
+				easeStart = false;
+				easeColor = 0;
+			}
+
+
+			easeColor = (int)Easing::OutQuad(easeColorT, easeColorMax, 0, 315);
+			if (easeColor>255)
+			{
+				easeColor = 255;
+			}
+		}
+		if (assignment)
+		{
+			if (change == false)
+			{
+				delete title;
+				title = nullptr;
+
+				game = new Game;
+			}
+			else if (change == true)
+			{
+				delete game;
+				game = nullptr;
+
+				title = new Title;
+
+			}
+
+			change = !change;
+			assignment = false;
+		}
+		Novice::ScreenPrintf(0, 220, "easeColorT=%f", easeColorT);
+		Novice::ScreenPrintf(0, 240, "easeColorC=%f", easeColorC);
+		Novice::ScreenPrintf(0, 260, "isStart=%d", isStart);
+		Novice::ScreenPrintf(0, 280, "easeColor=%d", easeColor);
 		///------------------///
 		/// ↑更新処理ここまで
 		///------------------///
@@ -82,6 +139,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		{
 			game->Draw();
 		}
+
+		Novice::DrawBox(0, 0, windowX, windowY, 0, 0xffffff00 + easeColor, kFillModeSolid);
+
 		///------------------///
 		/// ↑描画処理ここまで
 		///------------------///

@@ -16,6 +16,7 @@ Player::~Player()
 
 void Player::Init()
 {
+	
 	player.pos = { 640,560 };
 	player.size = { 100,100 };
 
@@ -30,7 +31,7 @@ void Player::Init()
 	}
 
 	shotCT = 20;
-	cullentShotCT = 0;
+	cullentShotCT = 5;
 
 	easeSize = 0;
 	easeSizeT = 0;
@@ -51,13 +52,13 @@ void Player::Upadte()
 		player.pos += inputVel * currentVel;
 
 		Shot();
-		for (int i = 0; i < kMaxBullet; i++)
-		{
-			bullet[i]->Update();
-		}
+		
 		InputManager::GetLeftStick(inputNum);
 	}
-	
+	for (int i = 0; i < kMaxBullet; i++)
+	{
+		bullet[i]->Update();
+	}
 
 
 }

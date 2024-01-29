@@ -125,6 +125,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="randPlus.cpp" />
     <ClCompile Include="Title.cpp" />
+    <ClCompile Include="TitleLetter.cpp" />
     <ClCompile Include="Vec2Op.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +165,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="Player.h" />
     <ClInclude Include="randPlus.h" />
     <ClInclude Include="Title.h" />
+    <ClInclude Include="TitleLetter.h" />
     <ClInclude Include="Vec2Op.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

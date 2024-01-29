@@ -17,7 +17,7 @@ void Enemy::Init()
 
 	color = 0xaa00aaff;
 
-	velocity = { 4 * direction,7 };
+	velocity = { 4 * direction,-7 };
 	isAlive = true;
 	respawnTime = 60;
 	currentTime = 0;
