@@ -39,6 +39,11 @@ private:
 	float setEaseTime;
 	bool resetEaseT;
 
+	float easeDeadSize;
+	float easeDeadSizeT;
+	float easeDeadTime;
+	float rotateDeadSize;
+
 public:
 
 	Enemy();

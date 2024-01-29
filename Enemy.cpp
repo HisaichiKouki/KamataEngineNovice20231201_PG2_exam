@@ -26,7 +26,7 @@ void Enemy::Init()
 	isDead = false;
 	isHit = false;
 
-	hitPoint = 30;
+	hitPoint = 3;
 
 	randPos = {};
 	initRandSize = (int)radius / 4;
@@ -34,6 +34,12 @@ void Enemy::Init()
 	easeSize = 0;
 	easeSizeT = 0;
 	setEaseTime = 60;
+
+	easeDeadTime = 20;
+	easeDeadSize = 0;
+	easeDeadSizeT = easeDeadTime;
+
+	rotateDeadSize = 0;
 }
 
 void Enemy::Update()
@@ -79,6 +85,7 @@ void Enemy::Update()
 
 			isAlive = false;
 			isDead = true;
+			easeDeadSizeT = 0;
 
 		}
 	}
@@ -90,6 +97,16 @@ void Enemy::Update()
 			if (currentTime > deadTime)
 			{
 				isDead = false;
+			}
+			else
+			{
+				if (easeDeadSizeT<easeDeadTime)
+				{
+					easeDeadSizeT++;
+					rotateDeadSize += 90;
+					easeDeadSize = Easing::OutElasticAmplitude(easeDeadSizeT, easeDeadTime, 30.0f, 0.3f);
+
+				}
 			}
 
 		}
@@ -141,7 +158,7 @@ void Enemy::Draw()
 		}
 		if (isDead)
 		{
-			Novice::DrawEllipse(int(pos.x_ + randPos.x_), int(pos.y_ + randPos.y_), int(radius + easeSize), int(radius - +easeSize), 0, RED, kFillModeSolid);
+			Novice::DrawEllipse(int(pos.x_ + randPos.x_), int(pos.y_ + randPos.y_), int(radius + easeSize + easeDeadSize), int(radius - +easeSize - easeDeadSize), (rotateDeadSize/180.0f)*3.1415f, RED, kFillModeSolid);
 
 		}
 	}
