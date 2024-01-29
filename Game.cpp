@@ -1,5 +1,19 @@
 ﻿#include "Game.h"
 
+Game::Game()
+{
+	Init();
+}
+
+Game::~Game()
+{
+	delete player;
+	delete enemy;
+
+	player = nullptr;
+	enemy = nullptr;
+}
+
 void Game::Update()
 {
 
@@ -52,6 +66,17 @@ void Game::Update()
 	/// ↑更新処理ここまで
 	///------------------///
 
+	
+}
+
+void Game::Init()
+{
+	player = new Player;
+	enemy = new Enemy;
+}
+
+void Game::Draw()
+{
 	///------------------///
 	/// ↓描画処理ここから
 	///------------------///

@@ -7,6 +7,7 @@ Bullet::Bullet()
 
 Bullet::~Bullet()
 {
+	
 }
 
 void Bullet::Init()

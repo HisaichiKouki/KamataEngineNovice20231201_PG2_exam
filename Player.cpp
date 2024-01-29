@@ -7,6 +7,11 @@ Player::Player()
 
 Player::~Player()
 {
+	for (int i = 0; i < kMaxBullet; i++)
+	{
+		delete bullet[i];
+		bullet[i] = nullptr;
+	}
 }
 
 void Player::Init()

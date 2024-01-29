@@ -1,5 +1,6 @@
 #include <Novice.h>
 #include "Game.h"
+#include "Title.h"
 const char kWindowTitle[] = "LC1A_20_ヒサイチ_コウキ";
 
 // Windowsアプリでのエントリーポイント(main関数)
@@ -11,6 +12,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Novice::Initialize(kWindowTitle, windowX, windowY);
 
 	Game* game = new Game;
+	Title* title = new Title;
+
+	bool change = false;
 
 	//bool True = true;
 	//bool False = false;
@@ -32,7 +36,34 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓更新処理ここから
 		///------------------///
 
-		game->Update();
+		if (InputManager::GetIsTriggerKey(DIK_RETURN))
+		{
+			if (change==false)
+			{
+				delete title;
+				title = nullptr;
+
+				game = new Game;
+			}
+			else if (change==true)
+			{
+				delete game;
+				game = nullptr;
+
+				title = new Title;
+			}
+
+			change = !change;
+		}
+
+		if (change == false)
+		{
+			title->Update();
+		}
+		else if (change == true)
+		{
+			game->Update();
+		}
 
 		
 		///------------------///
@@ -43,7 +74,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///------------------///
 
-		
+		if (change == false)
+		{
+			title->Draw();
+		}
+		else if (change == true)
+		{
+			game->Draw();
+		}
 		///------------------///
 		/// ↑描画処理ここまで
 		///------------------///

@@ -4,10 +4,16 @@
 #include "Collision.h"
 class Game
 {
-	Player* player = new Player;
+	Player* player;
 
-	Enemy* enemy = new Enemy;
+	Enemy* enemy;
 public:
+	Game();
+	~Game();
+	
 	void Update();
+	void Init();
+	void Draw();
+	
 };
 
