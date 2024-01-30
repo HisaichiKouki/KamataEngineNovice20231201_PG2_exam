@@ -28,6 +28,7 @@ void Enemy::Init()
 
 	hitPoint = 30;
 
+
 	randPos = {};
 	initRandSize = (int)radius / 4;
 	currentRandSize = 0;
