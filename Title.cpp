@@ -58,5 +58,8 @@ void Title::Draw()
 		player->bullet[i]->Draw();
 	}
 	//Novice::ScreenPrintf(600, 360, "title");
+	Novice::ScreenPrintf(100, 160, "Move > WASD <");
+	Novice::ScreenPrintf(100, 180, "Shot > SPACE <");
+	Novice::ScreenPrintf(1000, 180, "<- Attack!");
 
 }

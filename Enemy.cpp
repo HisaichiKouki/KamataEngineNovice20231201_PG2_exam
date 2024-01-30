@@ -26,7 +26,7 @@ void Enemy::Init()
 	isDead = false;
 	isHit = false;
 
-	hitPoint = 3;
+	hitPoint = 30;
 
 	randPos = {};
 	initRandSize = (int)radius / 4;
