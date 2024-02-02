@@ -157,6 +157,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		// ESCキーが押されたらループを抜ける
 		if (preKeys[DIK_ESCAPE] == 0 && keys[DIK_ESCAPE] != 0) {
+
+			delete game;
+			delete title;
+
 			break;
 		}
 	}
